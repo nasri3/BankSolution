@@ -3,18 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MicroserviceDemand.demo;
-import java.util.List;
+package MicroserviceResponse.demo.Repository;
 
+import MicroserviceResponse.demo.Entity.Loan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author omar
+ * @author nasri
  */
 @Repository
-public interface DemandRepository extends JpaRepository<Demand, Long>{
-   // public List<Demand> findAll();
+public interface LoanRepository extends JpaRepository<Loan, Long> {
     
 }

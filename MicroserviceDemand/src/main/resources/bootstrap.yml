@@ -2,7 +2,7 @@
 # Service registers under this name
 spring:
   application:
-    name: microservice-client
+    name: microservice-demand
    # Config Server Access
   cloud:
      config:
@@ -16,7 +16,7 @@ eureka:
 
 ## HTTP Server (Tomcat) Port
 server: 
-  port: 2222
+  port: 3333
 
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
 error:

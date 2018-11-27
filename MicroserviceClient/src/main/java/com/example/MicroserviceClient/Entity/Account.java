@@ -5,25 +5,41 @@
  */
 package com.example.MicroserviceClient.Entity;
 
+import com.example.MicroserviceClient.Entity.Enumeration.TypeOfAccount;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
  * @author omar
  */
+@Data
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Entity
 public class Account {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id ;
     
-    String typeOfAccount ;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    TypeOfAccount typeOfAccount ;
     
+    @NotNull
+    @Column( precision = 10)
     double amount ;
     
 
@@ -31,78 +47,18 @@ public class Account {
         //voila bb ce constructeur n est pas vide.
     }
 
-    public Account(Long id, String typeOfAccount, double amount) {
-        this.id = id;
+    public Account( TypeOfAccount typeOfAccount, double amount) {
         this.typeOfAccount = typeOfAccount;
         this.amount = amount;
     }
-
-    public Account(String typeOfAccount) {
-        this.typeOfAccount = typeOfAccount;
-    }
+    
+  
 
     
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTypeOfAccount() {
-        return typeOfAccount;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
 
    
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public void setTypeOfAccount(String typeOfAccount) {
-        this.typeOfAccount = typeOfAccount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-  
-
-  
-
-    @Override
-    public String toString() {
-        return "Account{" + "id=" + id + ", typeOfAccount=" + typeOfAccount + ", amount=" + amount + '}';
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Account other = (Account) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
-    }
-    
     
     
 

@@ -7,8 +7,14 @@ package com.example.MicroserviceClient.Web;
 
 import com.example.MicroserviceClient.Entity.Account;
 import com.example.MicroserviceClient.Repsitory.AccountRepository;
+import com.example.MicroserviceClient.Service.AccountService;
+import com.mycompany.common.AccountDto;
 import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,15 +25,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/accounts")
 public class AccountResource {
-    private final AccountRepository accountRepository;
+    private final AccountService accountService;
 
-    public AccountResource(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    public AccountResource(AccountService accountService) {
+        this.accountService = accountService;
     }
-    
+
+  
     @GetMapping
-     List<Account> findAll(){
-         return  this.accountRepository.findAll();
-     }
+    public List<AccountDto> findAll() {
+        return this.accountService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public AccountDto findById(@PathVariable Long id) {
+        return this.accountService.findById(id);
+    }
+
+    @PostMapping
+    public AccountDto create(@RequestBody AccountDto accountDto) {
+        return this.accountService.create(accountDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        this.accountService.delete(id);
+    }
     
 }

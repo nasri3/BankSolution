@@ -7,6 +7,7 @@ package com.example.MicroserviceClient.Web;
 
 import com.example.MicroserviceClient.Entity.Client;
 import com.example.MicroserviceClient.Service.ClientService;
+import com.mycompany.common.ClientDto;
 import java.util.List;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +35,16 @@ public class ClientResource {
     }
     
     
-    
-    
-    
    @GetMapping
-   public List<Client> findAll() {
+   public List<ClientDto> findAll() {
        return clientService.findAll() ;
-   }
+   }    
+    
+    
+    @GetMapping(path = "/{id}")
+    public ClientDto findById(@PathVariable Long id) {
+        return this.clientService.findById(id);
+    }
    
    @PostMapping
    public void addClient(@RequestBody Client cl ) {
@@ -52,6 +56,8 @@ public class ClientResource {
        clientService.removeClient(id)  ;
        
    }
+   
+   
    
    
     

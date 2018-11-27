@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MicroserviceDemand.demo;
-
-import org.springframework.stereotype.Service;
+package com.example.MicroserviceClient.Entity.Enumeration;
 
 /**
  *
- * @author omar
+ * @author nasri
  */
-@Service
-public class ThingToBuyService {
+public enum TypeOfAccount {
+    SAIVINGS,CURRENT
+
     
 }
