@@ -4,13 +4,13 @@ spring:
   application:
     name: discovery_service
 
-# Configure this Discovery Server
-eureka:
-  instance:
-    hostname: localhost
-  client: 
-    registerWithEureka: false
-    fetchRegistry: false
+## Configure this Discovery Server
+#eureka:
+#  instance:
+#    hostname: localhost
+#  client: 
+#    registerWithEureka: false
+#    fetchRegistry: false
 
 ## HTTP (Tomcat) port
 #server:

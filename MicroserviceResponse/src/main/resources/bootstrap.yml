@@ -8,26 +8,10 @@ spring:
      config:
          uir: http://localhost:8888
 
-# Discovery Server Access
-eureka:
-    client:
-      serviceUrl:
-        defaultZone: http://localhost:1111/eureka/
+management:
+   endpoints:
+      web:
+        exposure:
+           include: hystrix.stream
 
-## HTTP Server (Tomcat) Port
-server: 
-  port: 4444
-
-# Disable Spring Boot's "Whitelabel" default error page, so we can use our own
-error:
-  whitelabel:
-    enabled: false
-    
-
-logstash:
-  host: localhost
-  port: 5000
-  queue-size: 512    
-
-    
-    
+  
