@@ -12,6 +12,8 @@ import com.mycompany.common.ClientDto;
 import com.mycompany.common.DemandDto;
 import com.mycompany.common.LoanDto;
 import com.mycompany.common.ResponseDto;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -20,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -79,17 +82,10 @@ public class ResponseService {
 
     public ResponseDto studyDemand(DemandDto demand) {
         Response response = new Response();
-        RestTemplate restTemplate1 = new RestTemplate();
-
-        ClientDto clientDto = restTemplate1.getForEntity(
-                "http://localhost:2222/clients/{id}",
-                ClientDto.class,
-                demand.getClientId()
-        ).getBody();
-
+        ClientDto clientDto = getClientDto(demand.getClientId()).get();
         response.setResult(validateClientStatus(clientDto) && validateLoan(demand, clientDto));
         if (response.isResult()) {
-            Loan loan = new Loan( demand.getSumToLoan(), (int) ((int) demand.getSumToLoan() * 1.1 / (clientDto.getAverageOfGainPerMonth() * 0.30)),
+            Loan loan = new Loan(demand.getSumToLoan(), (int) ((int) demand.getSumToLoan() * 1.1 / (clientDto.getAverageOfGainPerMonth() * 0.30)),
                     clientDto.getAverageOfGainPerMonth() * 0.30,
                     0.10);
             this.loanService.create(loan);
@@ -99,8 +95,31 @@ public class ResponseService {
         return mapToDto(response);
     }
 
-   
-    
+    @HystrixCommand(fallbackMethod = "getDefaultClientDto")
+    private Optional<ClientDto> getClientDto(Long clientId) {
+        RestTemplate restTemplate1 = new RestTemplate();
+        ResponseEntity<ClientDto> resp = restTemplate1.getForEntity(
+                "http://localhost:2222/clients/{id}",
+                ClientDto.class,
+                clientId
+        );
+
+        if (resp.getStatusCode() == HttpStatus.OK) {
+            return Optional.ofNullable(resp.getBody());
+        } else {
+            log.error("Unable to get product with ID: " + clientId
+                    + ", StatusCode: " + resp.getStatusCode());
+            return Optional.empty();
+        }
+
+    }
+
+    Optional<ClientDto> getDefaultClientDto(Long clientId) {
+        log.info("Returning default ProductById for product Id: " + clientId);
+        ClientDto clientDto = new ClientDto(Long.MIN_VALUE, "FirstName", "LastName", LocalDateTime.MIN, 0, "job", 0, "email", 0, 0, null);
+        return Optional.ofNullable(clientDto);
+    }
+
     private ResponseDto mapToDto(Response response) {
         if (response.isResult()) {
             return new ResponseDto(response.getId(), response.isResult(),
