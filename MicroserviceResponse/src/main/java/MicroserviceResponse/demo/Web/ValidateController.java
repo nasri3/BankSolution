@@ -49,7 +49,8 @@ public class ValidateController {
         return responseDto;
 
     }
-   @PostMapping
+  
+    @PostMapping
     public void handling(@RequestBody DemandDto demand) {
         ResponseDto response = Validate(demand);
         demand.setResponseId(response.getId());

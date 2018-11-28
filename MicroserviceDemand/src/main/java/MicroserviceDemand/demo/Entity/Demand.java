@@ -6,6 +6,7 @@
 package MicroserviceDemand.demo.Entity ;
 
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,19 +29,23 @@ public class Demand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id ;
+    
+    @Column(precision = 2)
     @NotNull
     double sumToLoan ;
+  
     @NotNull
     Long idClient ;
+   
     @OneToOne
     ThingToBuy thing ;
     Long idResponse;
 
-    public Demand(double sumToLoan, long idClient, ThingToBuy thing, Long idResponse) {
+    public Demand(double sumToLoan, long idClient, ThingToBuy thing) {
         this.sumToLoan = sumToLoan;
         this.idClient = idClient;
         this.thing = thing;
-        this.idResponse = idResponse;
+        this.idResponse =new Long(-1);
     }
     
 

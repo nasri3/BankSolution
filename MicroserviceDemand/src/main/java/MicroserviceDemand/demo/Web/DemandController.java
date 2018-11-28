@@ -69,6 +69,11 @@ public class DemandController {
     public Demand findById(@PathVariable Long id) {
         return this.demandService.findById(id);
     }
+  
+    @GetMapping(path = "/untraited")
+    public  List<DemandDto> findAllUnprocessed(){
+         return this.demandService.findAllUnprocessed();
+    }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     public void create(@RequestBody Demand demand) {

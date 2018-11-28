@@ -12,6 +12,7 @@ import com.mycompany.common.DemandDto;
 import com.mycompany.common.ResponseDto;
 import com.mycompany.common.ThingToBuyDto;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import static jdk.nashorn.internal.objects.NativeMath.log;
 import org.springframework.stereotype.Service;
@@ -78,13 +79,13 @@ public class DemandService {
 
     public List<DemandDto> findAllUnprocessed() {
         List<DemandDto> unprocessed = findAll().stream()
-                .filter(demand -> demand.getResponseId() > 0)
+                .filter(demand -> Objects.equals(demand.getResponseId(), new Long(-1) ))
                 .collect(Collectors.toList());
         return unprocessed;
     }
 
     public boolean isTraited(long demandId) {
-        return findById(demandId).getIdResponse() != null;
+        return !Objects.equals(findById(demandId).getIdResponse(), new Long(-1));
     }
 
     public static DemandDto mapToDto(Demand demand) {
