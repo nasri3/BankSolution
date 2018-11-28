@@ -4,3 +4,6 @@ spring:
       uri: http://localhost:8888
   application:
     name: hystrix-dashboard
+ 
+server:
+    port: 5555   

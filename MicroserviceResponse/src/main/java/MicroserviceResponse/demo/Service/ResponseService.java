@@ -114,8 +114,8 @@ public class ResponseService {
 
     }
 
-    Optional<ClientDto> getDefaultClientDto(Long clientId) {
-        log.info("Returning default ProductById for product Id: " + clientId);
+    Optional<ClientDto> getDefaultClientDto() {
+        log.info("Returning default ClientDto");
         ClientDto clientDto = new ClientDto(Long.MIN_VALUE, "FirstName", "LastName", LocalDateTime.MIN, 0, "job", 0, "email", 0, 0, null);
         return Optional.ofNullable(clientDto);
     }
