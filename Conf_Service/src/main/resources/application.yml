@@ -13,4 +13,9 @@ spring:
           search-locations: classpath:/my_config
         git:
           skip-ssl-validation: true
+
+#spring.cloud:
+#   kubernetes:
+#       config:
+#          name: app-config
    
