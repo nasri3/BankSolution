@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>Hystrix</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>hystrix-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -64,6 +64,16 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+                           <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>0.10.0</version>
+                <configuration>
+                    <to>
+                        <image>nasrisalah/ilsig1/${project.artifactId}:${project.version}</image>
+                    </to>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 
