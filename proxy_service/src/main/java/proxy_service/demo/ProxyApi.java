@@ -43,7 +43,7 @@ public class ProxyApi {
     private SwaggerResource createSwaggerResource(ZuulProperties.ZuulRoute r) {
            SwaggerResource swaggerResource =new SwaggerResource();
            swaggerResource.setName(r.getServiceId());
-           swaggerResource.setLocation("/"+r.getId()+"/v2/api-docs");
+           swaggerResource.setLocation("/"+r.getServiceId()+"/v2/api-docs");
            swaggerResource.setSwaggerVersion("2.0");
            return swaggerResource;
     }

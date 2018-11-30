@@ -65,12 +65,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.Dto</groupId>
-            <artifactId>Bank-Dto</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${HOME}/.m2/repository/com/mycompany/common1/1.0-SNAPSHOT/common1-1.0-SNAPSHOT.jar</systemPath>
+            <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>common1</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -155,16 +153,22 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-                 <plugin>
-            <groupId>com.google.cloud.tools</groupId>
-            <artifactId>jib-maven-plugin</artifactId>
-            <version>0.10.0</version>
-            <configuration>
-                <to>
-                    <image>nasrisalah/ilsig1/${project.artifactId}:${project.version}</image>
-                </to>
-            </configuration>
-        </plugin>
+<!--            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>fabric8-maven-plugin</artifactId>
+                <version>3.5.38</version>
+
+                 This block will connect fabric8:resource and fabric8:build to lifecycle phases 
+                <executions>
+                    <execution>
+                        <id>fmp</id>
+                        <goals>
+                            <goal>resource</goal>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
         </plugins>
     </build>
 
