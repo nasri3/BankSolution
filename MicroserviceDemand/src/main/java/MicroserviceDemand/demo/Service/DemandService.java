@@ -89,7 +89,7 @@ public class DemandService {
     }
 
     public static DemandDto mapToDto(Demand demand) {
-        return new DemandDto(demand.getId(), 0, demand.getIdClient(), new ThingToBuyDto(demand.getThing().getId(),
+        return new DemandDto(demand.getId(), demand.getSumToLoan(), demand.getIdClient(), new ThingToBuyDto(demand.getThing().getId(),
                  demand.getThing().getCategory(), demand.getThing().getDescription(), demand.getThing().getEstimatedValue()),
                  demand.getIdResponse());
 

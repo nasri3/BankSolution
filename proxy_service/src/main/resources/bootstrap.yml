@@ -20,9 +20,9 @@ management:
         include: '*'
 zuul:
   routes:
-    customer:
-      path: /client/**
-    product:
-      path: /demand/**
-    order:
-      path: /response/**
+    client:
+      path: /microservice-client/**
+    demand:
+      path: /microservice-demand/**
+    response:
+      path: /microservice-response/**

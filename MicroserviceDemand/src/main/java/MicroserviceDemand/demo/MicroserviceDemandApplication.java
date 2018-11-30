@@ -30,10 +30,10 @@ public class MicroserviceDemandApplication {
         Stream.of(200, 600, 800).forEach(s -> thingToBuyRepository.save(
                 new ThingToBuy("s", "s", s)));
         List<ThingToBuy> l = thingToBuyRepository.findAll();
-        Demand c1=new Demand(10.0, 1, l.get(0));
+        Demand c1=new Demand(10, 1, l.get(0));
         demandRepository.save(c1);
-        demandRepository.save(new Demand(100000.0, 2, l.get(1)));
-        demandRepository.save(new Demand(100.0, 3, l.get(2)));
+        demandRepository.save(new Demand(100000, 2, l.get(1)));
+        demandRepository.save(new Demand(100, 3, l.get(2)));
 
     }
 

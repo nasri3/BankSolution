@@ -8,6 +8,7 @@ package com.example.MicroserviceClient.Entity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.annotation.Generated;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,16 +32,24 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id ;
+    @Column
     String FirstName ;
+    @Column
     String LastName;
+    @Column
     LocalDateTime dateOfBirth ;
+    @Column
     int age ;
+    @Column
     String job ;
+    @Column
     double averageOfGainPerMonth ;
     //@Email
     String email ;
     @NotNull
+    @Column
     long cin ;
+    @Column
     long phoneNumber ;
     
     @OneToOne

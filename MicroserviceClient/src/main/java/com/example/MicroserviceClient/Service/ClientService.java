@@ -54,9 +54,9 @@ public  ClientDto findById(long id){
         if (client != null) {
             return new ClientDto(client.getId(), client.getFirstName(),
                      client.getLastName(),
-                    client.getDateOfBirth(), 0,
-                    client.getJob(), 0,
-                    client.getEmail(), 0, 0,
+                    client.getDateOfBirth(), client.getAge(),
+                    client.getJob(),client.getAverageOfGainPerMonth(),
+                    client.getEmail(), client.getCin(), client.getPhoneNumber(),
                     new AccountDto(client.getId(), client.getAccount().getTypeOfAccount().toString(), 0));
         }
         return null;
